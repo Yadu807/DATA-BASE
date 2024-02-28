@@ -1,0 +1,147 @@
+1.1 DDL COMMANDS 
+a) DDL-CREATE
+
+create table EMPLOYEE(emp_id int,name varchar(20),city varchar(20),dob date,adhar_no int);
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+
+
+mysql> create table STUDENT(roll_no int primary key,name varchar(20) not null,age int not null,Address varchar(50),Gender varchar(6) default 'm',check (age<=99));
+
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| age     | int         | NO   |     | NULL    |       |
+| Address | varchar(50) | YES  |     | NULL    |       |
+| Gender  | varchar(6)  | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+
+
+
+
+create temporary table STUDENT1 select *FROM STUDENT;
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   |     | NULL    | NULL  |
+| name    | varchar(20) | NO   |     | NULL    | NULL  |
+| age     | int         | NO   |     | NULL    | NULL  |
+| Address | varchar(50) | YES  |     | NULL    | NULL  |
+| Gender  | varchar(6)  | YES  |     | m       | NULL  |
++---------+-------------+------+-----+---------+-------+
+
+
+create table emp select *from EMPLOYEE;
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | date        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+
+
+
+create database INVOICE;
+
+ use INVOICE;
+ 
+create table Customer(id int primary key,name varchar(20),address varchar(40),City varchar(20),ph_no int);
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| address | varchar(40) | YES  |     | NULL    |       |
+| City    | varchar(20) | YES  |     | NULL    |       |
+| ph_no   | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+
+create table Product(pid int primary key,pname varchar(20),price int default '0');
+
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | int         | NO   | PRI | NULL    |       |
+| pname | varchar(20) | YES  |     | NULL    |       |
+| price | int         | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+
+
+create table Invoice_master(inv_id int primary key,cust_id int,inv_date date, foreign key(cust_id) references Customer(id));
+
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | NO   | PRI | NULL    |       |
+| cust_id  | int  | YES  | MUL | NULL    |       |
+| inv_date | date | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+
+create table Invoice_item(inv_id int,pid int,quantity int, foreign key(inv_id) references Invoice_master(inv_id),foreign key(pid) references Product(pid));
+
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| inv_id   | int  | YES  | MUL | NULL    |       |
+| pid      | int  | YES  | MUL | NULL    |       |
+| quantity | int  | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+
+
+1.2 DDL-ALTER & DROP
+
+1.mysql> alter table EMPLOYEE add SSN int first;
+
+2.mysql> alter table EMPLOYEE modify dob year;
+
+3.mysql> alter table EMPLOYEE drop column emp_id;
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| SSN      | int         | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| dob      | year        | YES  |     | NULL    |       |
+| adhar_no | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+4.mysql> alter table EMPLOYEE add constraint unique key(SSN,adhar_no);
+
+5.mysql> alter table STUDENT modify age int null;
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | NO   |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| Address | varchar(50) | YES  |     | NULL    |       |
+| Gender  | varchar(6)  | YES  |     | m       |       |
++---------+-------------+------+-----+---------+-------+
+
+
+6.mysql> alter table EMPLOYEE rename to PERSON;
+
+7.mysql> drop table STUDENT1;
+
