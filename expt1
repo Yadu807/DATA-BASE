@@ -145,3 +145,4 @@ create table Invoice_item(inv_id int,pid int,quantity int, foreign key(inv_id) r
 
 7.mysql> drop table STUDENT1;
 
+//VERIFIED
