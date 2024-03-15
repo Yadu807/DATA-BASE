@@ -1,0 +1,450 @@
+1.2 DML COMMANDS
+  a)DML-INSERT
+
+1.
+mysql> insert into PERSON values(1,"Yadu","calicut",2003-04-21,4321832);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into PERSON values(2,"ram","Kochi",2001-04-01,3423832);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> insert into PERSON values(3,"ramu","Kochi",2000-04-30,234342342);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into PERSON values(4,"leela","kollam",2000-12-30,24573342);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into PERSON values(5,"Abhi","kollam",2000-02-30,5323342);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> select * from PERSON;
++------+-------+---------+------+-----------+
+| SSN  | name  | city    | dob  | adhar_no  |
++------+-------+---------+------+-----------+
+|    1 | Yadu  | calicut | 1978 |   4321832 |
+|    2 | ram   | Kochi   | 1996 |   3423832 |
+|    3 | ramu  | Kochi   | 1966 | 234342342 |
+|    4 | leela | kollam  | 1958 |  24573342 |
+|    5 | Abhi  | kollam  | 1968 |   5323342 |
++------+-------+---------+------+-----------+
+
+
+3)
+
+mysql> insert into Customer(id,name,address,city)values(10001,"ram","tfyffg","Calicut");
+mysql> insert into Customer(id,name,address,city)values(10005,"ramu","tsgdfg","Calicut");
+Query OK, 1 row affected (0.64 sec)
+
+mysql> insert into Customer values(10002,"Yadu","fhgwefh","ekm",873733333),(10003,"Abhi","ghfjkh","tvm",78554544);
+Query OK, 2 rows affected (0.57 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into Customer(id,name,address,city)values(10004,"radha","hfsdkfj","Calicut");
+Query OK, 1 row affected (0.59 sec)
+
+mysql> select *from Customer;
++-------+-------+---------+---------+-----------+
+| id    | name  | address | City    | ph_no     |
++-------+-------+---------+---------+-----------+
+| 10001 | ram   | tfyffg  | Calicut |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm     | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm     |  78554544 |
+| 10004 | radha | hfsdkfj | Calicut |      NULL |
+| 10005 | ramu  | tsgdfg  | Calicut |      NULL |
++-------+-------+---------+---------+-----------+
+
+
+mysql> insert into Product values(001,"pen",60),(002,"pencil",55),(003,"soap",80),(004,"book",85),(005,"eraiser",95.5),(006,"bucket",100);
+Query OK, 6 rows affected (0.10 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    60 |
+|   2 | pencil  |    55 |
+|   3 | soap    |    80 |
+|   4 | book    |    85 |
+|   5 | eraiser |    96 |
+|   6 | bucket  |   100 |
++-----+---------+-------+
+
+
+mysql> insert into Invoice_master values(102,10001,'2022-05-26'),(103,10002,'2021-06-22'),(104,10003,'2022-01-24'),(105,10003,'2022-01-22');
+Query OK, 4 rows affected (0.11 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select *from Invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |   10001 | 2022-05-26 |
+|    102 |   10001 | 2022-05-26 |
+|    103 |   10002 | 2021-06-22 |
+|    104 |   10003 | 2022-01-24 |
+|    105 |   10003 | 2022-01-22 |
++--------+---------+------------+
+
+
+mysql> insert into Invoice_item values(102,1,2),(102,2,202),(104,3,1),(101,6,2),(101,5,1),(105,4,1);
+Query OK, 6 rows affected (0.09 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+
+
+
+  b)DML-UPDATE
+  
+1.
+  
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    60 |
+|   2 | pencil  |    55 |
+|   3 | soap    |    80 |
+|   4 | book    |    85 |
+|   5 | eraiser |    96 |
+|   6 | bucket  |   100 |
++-----+---------+-------+
+
+mysql> update Product set price=150 where pid=6;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    60 |
+|   2 | pencil  |    55 |
+|   3 | soap    |    80 |
+|   4 | book    |    85 |
+|   5 | eraiser |    96 |
+|   6 | bucket  |   150 |
++-----+---------+-------+
+
+
+2.
+
+mysql> select *from Customer;
++-------+-------+---------+---------+-----------+
+| id    | name  | address | City    | ph_no     |
++-------+-------+---------+---------+-----------+
+| 10001 | ram   | tfyffg  | Calicut |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm     | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm     |  78554544 |
+| 10004 | radha | hfsdkfj | Calicut |      NULL |
+| 10005 | ramu  | tsgdfg  | Calicut |      NULL |
++-------+-------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> update Customer set city="Kozhikode" where city="Calicut";
+Query OK, 3 rows affected (0.12 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+-----------+
+| id    | name  | address | City      | ph_no     |
++-------+-------+---------+-----------+-----------+
+| 10001 | ram   | tfyffg  | Kozhikode |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm       | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm       |  78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |      NULL |
+| 10005 | ramu  | tsgdfg  | Kozhikode |      NULL |
++-------+-------+---------+-----------+-----------+
+
+3.
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    60 |
+|   2 | pencil  |    55 |
+|   3 | soap    |    80 |
+|   4 | book    |    85 |
+|   5 | eraiser |    96 |
+|   6 | bucket  |   150 |
++-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> update Product set price=price+(price*2/100);
+Query OK, 6 rows affected (0.07 sec)
+Rows matched: 6  Changed: 6  Warnings: 0
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+
+4.
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+-----------+
+| id    | name  | address | City      | ph_no     |
++-------+-------+---------+-----------+-----------+
+| 10001 | ram   | tfyffg  | Kozhikode |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm       | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm       |  78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |      NULL |
+| 10005 | ramu  | tsgdfg  | Kozhikode |      NULL |
++-------+-------+---------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> update Customer set address="jdfheh",city="tvm",ph_no="85734894" where id=10005;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+-----------+
+| id    | name  | address | City      | ph_no     |
++-------+-------+---------+-----------+-----------+
+| 10001 | ram   | tfyffg  | Kozhikode |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm       | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm       |  78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |      NULL |
+| 10005 | ramu  | jdfheh  | tvm       |  85734894 |
++-------+-------+---------+-----------+-----------+
+
+5.
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |        2 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+6 rows in set (0.02 sec)
+
+mysql> update Invoice_item set quantity=1 where inv_id=101 and pid=6;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |        2 |
+|    104 |    3 |        1 |
+|    101 |    6 |        1 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+
+ c)DML-DELETE
+ 
+1.
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+-----------+
+| id    | name  | address | City      | ph_no     |
++-------+-------+---------+-----------+-----------+
+| 10001 | ram   | tfyffg  | Kozhikode |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm       | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm       |  78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |      NULL |
+| 10005 | ramu  | jdfheh  | tvm       |  85734894 |
++-------+-------+---------+-----------+-----------+
+
+mysql> set foreign_key_checks=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from Customer where id=10002;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+----------+
+| id    | name  | address | City      | ph_no    |
++-------+-------+---------+-----------+----------+
+| 10001 | ram   | tfyffg  | Kozhikode |     NULL |
+| 10003 | Abhi  | ghfjkh  | tvm       | 78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |     NULL |
+| 10005 | ramu  | jdfheh  | tvm       | 85734894 |
++-------+-------+---------+-----------+----------+
+
+2.
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+6 rows in set (0.00 sec)
+
+mysql> delete from Invoice_item where quantity <2;;
+Query OK, 3 rows affected (0.11 sec)
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
++--------+------+----------+
+
+
+3. 
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
++--------+------+----------+
+3 rows in set (0.02 sec)
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.02 sec)
+
+
+mysql> delete from Invoice_item where inv_id=102 and pid=1;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
++--------+------+----------+
+2 rows in set (0.00 sec)
+
+
+4.
+
+mysql> set foreign_key_checks=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from Customer;
++-------+-------+---------+-----------+----------+
+| id    | name  | address | City      | ph_no    |
++-------+-------+---------+-----------+----------+
+| 10001 | ram   | tfyffg  | Kozhikode |     NULL |
+| 10003 | Abhi  | ghfjkh  | tvm       | 78554544 |
+| 10004 | radha | hfsdkfj | Kozhikode |     NULL |
+| 10005 | ramu  | jdfheh  | tvm       | 85734894 |
++-------+-------+---------+-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete from Customer where ph_no is null;
+Query OK, 2 rows affected (0.14 sec)
+
+mysql> select *from Customer;
++-------+------+---------+------+----------+
+| id    | name | address | City | ph_no    |
++-------+------+---------+------+----------+
+| 10003 | Abhi | ghfjkh  | tvm  | 78554544 |
+| 10005 | ramu | jdfheh  | tvm  | 85734894 |
++-------+------+---------+------+----------+
+2 rows in set (0.00 sec)
+
+mysql> set foreign_key_checks=1;
+Query OK, 0 rows affected (0.00 sec)
+
+
+5.
+
+mysql> use Yadu;
+
+mysql> select *from STUDENT;
++---------+--------+------+----------+--------+
+| roll_no | name   | age  | Address  | Gender |
++---------+--------+------+----------+--------+
+|       1 | Yadu   |   22 | abcd     | m      |
+|      12 | Ramu   |   20 | dsdscd   | m      |
+|      23 | Abhi   |   22 | qwrcd    | m      |
+|      27 | Sheela |   22 | shdcd    | f      |
+|      30 | Leela  |   21 | sdjkfhcd | f      |
++---------+--------+------+----------+--------+
+5 rows in set (0.04 sec)
+
+mysql> delete from STUDENT;
+Query OK, 5 rows affected (0.09 sec)
+
+mysql> select *from STUDENT;
+Empty set (0.00 sec)
+
+
+6.
+
+
+mysql> use INVOICE;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select *from Customer;
++-------+------+---------+------+----------+
+| id    | name | address | City | ph_no    |
++-------+------+---------+------+----------+
+| 10003 | Abhi | ghfjkh  | tvm  | 78554544 |
+| 10005 | ramu | jdfheh  | tvm  | 85734894 |
++-------+------+---------+------+----------+
+2 rows in set (0.00 sec)
+
+
+mysql> set foreign_key_checks=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from Customer where id=10003;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select *from Customer;
++-------+------+---------+------+----------+
+| id    | name | address | City | ph_no    |
++-------+------+---------+------+----------+
+| 10005 | ramu | jdfheh  | tvm  | 85734894 |
++-------+------+---------+------+----------+
+1 row in set (0.00 sec)
+
+
