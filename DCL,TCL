@@ -1,0 +1,152 @@
+                       TCL
+
+mysql> set autocommit=off;
+Query OK, 0 rows affected (0.01 sec)
+
+
+mysql> insert into Book values(12,"fsdfkh");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.54 sec)
+
+mysql> select *from Book;
++-----+--------+
+| id  | B_name |
++-----+--------+
+|  12 | fsdfkh |
+| 123 | qwer   |
+| 234 | asdf   |
+| 345 | zxcv   |
++-----+--------+
+4 rows in set (0.00 sec)
+
+
+mysql> delete from Book where id=12;
+Query OK, 1 row affected (0.50 sec)
+
+mysql> select *from Book;
++-----+--------+
+| id  | B_name |
++-----+--------+
+| 123 | qwer   |
+| 234 | asdf   |
+| 345 | zxcv   |
++-----+--------+
+3 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.42 sec)
+
+mysql> select *from Book;
++-----+--------+
+| id  | B_name |
++-----+--------+
+|  12 | fsdfkh |
+| 123 | qwer   |
+| 234 | asdf   |
+| 345 | zxcv   |
++-----+--------+
+4 rows in set (0.00 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into Book values(112,"wdhgasjh");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into Book values(2,"fkjjjjh");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s3;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from Book;
++-----+----------+
+| id  | B_name   |
++-----+----------+
+|   2 | fkjjjjh  |
+|  12 | fsdfkh   |
+| 112 | wdhgasjh |
+| 123 | qwer     |
+| 234 | asdf     |
+| 345 | zxcv     |
++-----+----------+
+6 rows in set (0.00 sec)
+
+mysql> rollback to s2;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from Book;
++-----+----------+
+| id  | B_name   |
++-----+----------+
+|  12 | fsdfkh   |
+| 112 | wdhgasjh |
+| 123 | qwer     |
+| 234 | asdf     |
+| 345 | zxcv     |
++-----+----------+
+5 rows in set (0.00 sec)
+
+
+                           DCL
+                          
+GRANT
+
+
+
+mysql> create user Yadu@'localhost' identified by'mypass';
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> create user Yadu1@'localhost' identified by'mypass';
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> grant all on KSB.Book to Yadu@'localhost';
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show grants for Yadu@'localhost';
++------------------------------------------------------------+
+| Grants for Yadu@localhost                                  |
++------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Yadu`@`localhost`                   |
+| GRANT ALL PRIVILEGES ON `KSB`.`Book` TO `Yadu`@`localhost` |
++------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+Q1
+
+
+mysql> grant delete,update on KSB.Book to Yadu1@'localhost';
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> show grants for Yadu1@'localhost';
++-------------------------------------------------------------+
+| Grants for Yadu1@localhost                                  |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Yadu1`@`localhost`                   |
+| GRANT UPDATE, DELETE ON `KSB`.`Book` TO `Yadu1`@`localhost` |
++-------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
+REVOKE
+
+
+mysql> revoke delete on KSB.Book from Yadu1@'localhost';
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show grants for Yadu1@'localhost';
++-----------------------------------------------------+
+| Grants for Yadu1@localhost                          |
++-----------------------------------------------------+
+| GRANT USAGE ON *.* TO `Yadu1`@`localhost`           |
+| GRANT UPDATE ON `KSB`.`Book` TO `Yadu1`@`localhost` |
++-----------------------------------------------------+
+2 rows in set (0.00 sec)
+
+
