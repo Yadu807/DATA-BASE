@@ -1,0 +1,130 @@
+     1.5 ACCESSING DATABASE(SUBQUERY)
+     
+ 1.
+ 
+ mysql> select *from Customer;
++-------+-------+---------+---------+-----------+
+| id    | name  | address | City    | ph_no     |
++-------+-------+---------+---------+-----------+
+| 10001 | ram   | tfyffg  | Calicut |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm     | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm     |  78554544 |
+| 10004 | radha | hfsdkfj | Calicut |      NULL |
+| 10005 | ramu  | jdfheh  | tvm     |  85734894 |
++-------+-------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+
+
+mysql> select *from Invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    101 |   10001 | 2022-05-26 |
+|    102 |   10001 | 2022-05-26 |
+|    103 |   10002 | 2021-06-22 |
+|    104 |   10003 | 2022-01-24 |
+|    105 |   10003 | 2022-01-22 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select name from Customer where id in (select cust_id Invoice_master where inv_date='2022-05-26');
+ERROR 1054 (42S22): Unknown column 'cust_id' in 'field list'
+mysql> select name from Customer where id in (select cust_id from Invoice_master where inv_date='2022-05-26');
++------+
+| name |
++------+
+| ram  |
++------+
+1 row in set (0.00 sec)
+
+
+2.
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select pname,price from Product where pid in (select pid from Invoice_item);
++---------+-------+
+| pname   | price |
++---------+-------+
+| pen     |    61 |
+| pencil  |    56 |
+| soap    |    82 |
+| book    |    87 |
+| eraiser |    98 |
+| bucket  |   153 |
++---------+-------+
+6 rows in set (0.01 sec)
+
+
+3.
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select pname from Product where pid in (select pid from Invoice_item where quantity <3);
++---------+
+| pname   |
++---------+
+| pen     |
+| soap    |
+| book    |
+| eraiser |
+| bucket  |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> 
+
+
+

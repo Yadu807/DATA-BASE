@@ -1,0 +1,103 @@
+       1.6 OPTIMIZING DATABASE
+       
+       
+1.
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select pname,price from Product where pname !="soap" order by price;
++---------+-------+
+| pname   | price |
++---------+-------+
+| pencil  |    56 |
+| pen     |    61 |
+| book    |    87 |
+| eraiser |    98 |
+| bucket  |   153 |
++---------+-------+
+5 rows in set (0.00 sec)
+
+
+2.
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> select min(price) as Minimum, max(price) as Maximum,avg(price) as Average from Product;
++---------+---------+---------+
+| Minimum | Maximum | Average |
++---------+---------+---------+
+|      56 |     153 | 89.5000 |
++---------+---------+---------+
+1 row in set (0.00 sec)
+
+
+3.
+
+mysql> select *from Customer;
++-------+-------+---------+---------+-----------+
+| id    | name  | address | City    | ph_no     |
++-------+-------+---------+---------+-----------+
+| 10001 | ram   | tfyffg  | Calicut |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm     | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm     |  78554544 |
+| 10004 | radha | hfsdkfj | Calicut |      NULL |
+| 10005 | ramu  | jdfheh  | tvm     |  85734894 |
++-------+-------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select city, count(id) as "NO. of customers" from Customer group by City; 
++---------+------------------+
+| city    | NO. of customers |
++---------+------------------+
+| Calicut |                2 |
+| ekm     |                1 |
+| tvm     |                2 |
++---------+------------------+
+3 rows in set (0.00 sec)
+
+
+4.
+
+mysql> select *from Customer;
++-------+-------+---------+---------+-----------+
+| id    | name  | address | City    | ph_no     |
++-------+-------+---------+---------+-----------+
+| 10001 | ram   | tfyffg  | Calicut |      NULL |
+| 10002 | Yadu  | fhgwefh | ekm     | 873733333 |
+| 10003 | Abhi  | ghfjkh  | tvm     |  78554544 |
+| 10004 | radha | hfsdkfj | Calicut |      NULL |
+| 10005 | ramu  | jdfheh  | tvm     |  85734894 |
+| 10006 | sitha | hadgd   | Calicut |    567567 |
++-------+-------+---------+---------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select city, count(*) as "NO. of customers" from Customer group by City having count(City)>2;
++---------+------------------+
+| city    | NO. of customers |
++---------+------------------+
+| Calicut |                3 |
++---------+------------------+
+1 row in set (0.00 sec)
+
