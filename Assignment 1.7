@@ -1,0 +1,51 @@
+           1.7 OPTIMIZING DATABASE(JOIN)
+           
+1.
+
+mysql> select *from Product;
++-----+---------+-------+
+| pid | pname   | price |
++-----+---------+-------+
+|   1 | pen     |    61 |
+|   2 | pencil  |    56 |
+|   3 | soap    |    82 |
+|   4 | book    |    87 |
+|   5 | eraiser |    98 |
+|   6 | bucket  |   153 |
++-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select *from Invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    102 |    2 |      202 |
+|    101 |    6 |        2 |
+|    102 |    1 |        2 |
+|    102 |    2 |      202 |
+|    104 |    3 |        1 |
+|    101 |    6 |        2 |
+|    101 |    5 |        1 |
+|    105 |    4 |        1 |
++--------+------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select Product.pname,Invoice_item.quantity from Product inner join Invoice_item on Product.pid=Invoice_item.pid;
++---------+----------+
+| pname   | quantity |
++---------+----------+
+| pen     |        2 |
+| pencil  |      202 |
+| pencil  |      202 |
+| soap    |        1 |
+| book    |        1 |
+| eraiser |        1 |
+| bucket  |        2 |
+| bucket  |        2 |
++---------+----------+
+8 rows in set (0.00 sec)
+
+
+2.
+
+
