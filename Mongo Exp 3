@@ -1,0 +1,236 @@
+            NoSql- CRUD
+
+1.
+
+
+ksb> use Invoice
+switched to db Invoice
+Invoice> db.createCollection("Customer")
+{ ok: 1 }
+Invoice> db.createCollection("Product")
+{ ok: 1 }
+Invoice> show collections
+Customer
+Invoice> db.Customer.insertMany([{id:1001,name:"Maino",address:"guyjhg",city:"Calicut"},{id:1002,name:"Granachoo",address:"qwer",city:"Calicut"},{id:1003,name:"Bruno",address:"asdf",city:"Ekm"},{id:1004,name:"Onana",address:"zxcv",city:"Ekm"},{id:1005,name:"Casemiro",address:"pouy",city:"Thrissur"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('6613726a79fef93cf1ef634b'),
+    '1': ObjectId('6613726a79fef93cf1ef634c'),
+    '2': ObjectId('6613726a79fef93cf1ef634d'),
+    '3': ObjectId('6613726a79fef93cf1ef634e'),
+    '4': ObjectId('6613726a79fef93cf1ef634f')
+  }
+}
+
+Invoice> db.Product.insertMany([{Pid:1,Pname:"pen", price:120},{Pid:2,Pname:"pencil", price:12},{Pid:3,Pname:"Book", price:40},{Pid:4,Pname:"Eraser", price:12},{Pid:5,Pname:"Bucket", price:34}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66139169d9271410fcef634b'),
+    '1': ObjectId('66139169d9271410fcef634c'),
+    '2': ObjectId('66139169d9271410fcef634d'),
+    '3': ObjectId('66139169d9271410fcef634e'),
+    '4': ObjectId('66139169d9271410fcef634f')
+  }
+}
+Invoice> db.Product.find()
+[
+  {
+    _id: ObjectId('66139169d9271410fcef634b'),
+    Pid: 1,
+    Pname: 'pen',
+    price: 120
+  },
+  {
+    _id: ObjectId('66139169d9271410fcef634c'),
+    Pid: 2,
+    Pname: 'pencil',
+    price: 12
+  },
+  {
+    _id: ObjectId('66139169d9271410fcef634d'),
+    Pid: 3,
+    Pname: 'Book',
+    price: 40
+  },
+  {
+    _id: ObjectId('66139169d9271410fcef634e'),
+    Pid: 4,
+    Pname: 'Eraser',
+    price: 12
+  },
+  {
+    _id: ObjectId('66139169d9271410fcef634f'),
+    Pid: 5,
+    Pname: 'Bucket',
+    price: 34
+  }
+]
+
+
+2.
+
+
+Invoice> db.Customer.find()
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634b'),
+    id: 1001,
+    name: 'Maino',
+    address: 'guyjhg',
+    city: 'Calicut'voice> db.Customer.find()
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634f'),
+    id: 1005,
+    name: 'Casemiro',
+    address: 'pouy',
+    city: 'Thiru'
+  }
+]
+Invoice> 
+
+
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634f'),
+    id: 1005,
+    name: 'Casemiro',
+    address: 'pouy',
+    city: 'Thrissur'
+  }
+]
+Invoice> 
+
+
+3.
+
+
+Invoice> db.Customer.updateOne({'city':"Thrissur"},{$set:{'city':"Thiru"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Invoice> db.Customer.find()
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634b'),
+    id: 1001,
+    name: 'Maino',
+    address: 'guyjhg',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634f'),
+    id: 1005,
+    name: 'Casemiro',
+    address: 'pouy',
+    city: 'Thiru'
+  }
+]
+
+
+4.
+
+
+voice> db.Customer.find()
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634f'),
+    id: 1005,
+    name: 'Casemiro',
+    address: 'pouy',
+    city: 'Thiru'
+  }
+]
+Invoice> 
+
+
