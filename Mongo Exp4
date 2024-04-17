@@ -1,0 +1,111 @@
+          EXP4 NoSQL- Retrieving Data
+          
+          
+1.
+
+Invoice> db.Customer.find({$or:[{city:'Ekm'},{city:'Thiru'}] })
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634f'),
+    id: 1005,
+    name: 'Casemiro',
+    address: 'pouy',
+    city: 'Thiru'
+  }
+]
+
+
+2.
+
+Invoice> db.Customer.find({id:{$lt:1004}})
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  }
+]
+
+
+
+3.
+
+
+Invoice> db.Customer.find({city:{$ne:'Thiru'}})
+[
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634c'),
+    id: 1002,
+    name: 'Granachoo',
+    address: 'qwer',
+    city: 'Calicut'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634d'),
+    id: 1003,
+    name: 'Bruno',
+    address: 'asdf',
+    city: 'Ekm'
+  },
+  {
+    _id: ObjectId('6613726a79fef93cf1ef634e'),
+    id: 1004,
+    name: 'Onana',
+    address: 'zxcv',
+    city: 'Ekm'
+  },
+  {
+    '0': {
+      id: 1006,
+      name: 'Magiure',
+      address: 'gjhg',
+      city: 'Calicut',
+      age: 34
+    },
+    _id: ObjectId('661caaf02b495a5f9bef634b')
+  },
+  {
+    '0': {
+      id: 1007,
+      name: 'Ten Hag',
+      address: 'gerf',
+      city: 'Calicut',
+      age: 64
+    },
+    _id: ObjectId('661cab112b495a5f9bef634c')
+  },
+  {
+    '0': {
+      id: 1007,
+      name: 'Ten Hag',
+      address: 'gerf',
+      city: 'Calicut',
+      age: 64
+    },
+    _id: ObjectId('661cac942b495a5f9bef634d')
+  }
+]
+
