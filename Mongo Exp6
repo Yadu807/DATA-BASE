@@ -1,0 +1,48 @@
+           EXP 6: NoSQL - ADMINISTRATION
+           
+           
+ 1.
+ 
+ 
+ Invoice> db.createUser({user:"Customer_1",pwd:"1234",roles:[{role:"read",db:"Invoice"}]})
+{ ok: 1 }
+
+
+2.
+
+
+test> use Yadu
+switched to db Yadu
+Yadu> db.dropDatabase()
+{ ok: 1, dropped: 'Yadu' }
+Yadu> show dbs
+Invoice  112.00 KiB
+admin    132.00 KiB
+config   108.00 KiB
+ksb       72.00 KiB
+local     72.00 KiB
+Yadu> 
+[2]+  Stopped                 mongosh
+
+
+3.
+(base) ksb@ksb-OptiPlex-3060:~$ mongorestore --db Yadu dump/Yadu
+
+
+test> show dbs
+Invoice  112.00 KiB
+Yadu       8.00 KiB
+admin    132.00 KiB
+config   108.00 KiB
+ksb       72.00 KiB
+local     72.00 KiB
+test> use dbs
+switched to db dbs
+dbs> use Yadu
+switched to db Yadu
+Yadu> show collections
+abc
+
+
+
+
